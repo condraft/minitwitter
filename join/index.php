@@ -1,16 +1,24 @@
 <?php
-if ($_POST['name'] === ''){
-	$error['name'] = 'blank';
+if(!empty($_POST)){
+	if ($_POST['name'] === ''){
+		$error['name'] = 'blank';
+	}
+	if ($_POST['email'] === ''){
+		$error['email'] = 'blank';
+	}
+	if (strlen($_POST['password']) < 4){
+		$error['password'] = 'length';
+	}
+	if ($_POST['password'] === ''){
+		$error['password'] = 'blank';
+	}
+	if(empty($error)){
+		header('Location: check.php');
+		exit();
+	}
 }
-if ($_POST['email'] === ''){
-	$error['email'] = 'blank';
-}
-if (strlen($_POST['password']) < 4){
-	$error['password'] = 'length';
-}
-if ($_POST['password'] === ''){
-	$error['password'] = 'blank';
-}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
