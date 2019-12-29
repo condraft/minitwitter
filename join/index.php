@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!empty($_POST)){
 	if ($_POST['name'] === ''){
 		$error['name'] = 'blank';
@@ -13,11 +14,15 @@ if(!empty($_POST)){
 		$error['password'] = 'blank';
 	}
 	if(empty($error)){
+		$_SESSION['join'] = $_POST;
 		header('Location: check.php');
 		exit();
 	}
 }
 
+if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
+	$_POST = $_SESSION['join'];
+}
 
 ?>
 <!DOCTYPE html>
