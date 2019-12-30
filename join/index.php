@@ -88,6 +88,9 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 			<?php if($error['image'] === 'type'): ?>
 			<p class='error'>*Only Image[.jpg.gif.png]</p>
 			<?php endif; ?>
+			<?php if(!empty($error)): ?>
+			<p class='error'>*choice IMG onemore</p>
+			<?php endif; ?>
         </dd>
 	</dl>
 	<div><input type="submit" value="入力内容を確認する" /></div>
