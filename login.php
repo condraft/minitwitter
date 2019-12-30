@@ -2,7 +2,13 @@
 session_start();
 require('dbconnect.php');
 
+if($_COOKIE['email'] !== ''){
+  $email = $_COOKIE['email'];
+}
+
 if(!empty($_POST)){
+  $email = $_POST['email'];
+  
   if($_POST['email'] !== '' && $_POST['password'] !== ''){
     $login = $db->prepare('SELECT * FROM members WHERE email=? AND password=?');
     $login->execute(array(
@@ -14,6 +20,11 @@ if(!empty($_POST)){
     if($member){
       $_SESSION['id'] = $member['id'];
       $_SESSION['time'] = time();
+
+      if($_POST['save'] === 'on'){
+        setcookie('email', $_POST['email'], time()+60*60*24*14);
+      }
+
       header('Location: index.php');
       exit();
     }else{
@@ -47,7 +58,7 @@ if(!empty($_POST)){
       <dl>
         <dt>メールアドレス</dt>
         <dd>
-          <input type="text" name="email" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>" />
+          <input type="text" name="email" size="35" maxlength="255" value="<?php print(htmlspecialchars($email, ENT_QUOTES)); ?>" />
           <?php if($error['login'] === 'blank'): ?>
             <p class="error">*input mailaddress and password</p>
           <?php endif; ?>
