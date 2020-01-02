@@ -32,7 +32,7 @@ $posts->execute(array($_REQUEST['id']));
   <div id="content">
   <p>&laquo;<a href="index.php">一覧にもどる</a></p>
  
-  <?php if(post = $posts->fetch()): ?>
+  <?php if($post = $posts->fetch()): ?>
     <div class="msg">
     <img src="member_picture/<?php print(htmlspecialchars($post['picture'])); ?>" />
     <p><?php print(htmlspecialchars($post['message'])); ?>
